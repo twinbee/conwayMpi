@@ -1,0 +1,6 @@
+# Submit file for Sweetgum
+#PBS -l ncpus=3
+#PBS -l walltime=1:00:00,cput=0:01:00 
+#PBS -l mem=16MB 
+#PBS -N conway_pl 
+mpiCC -o parallel -woffall && mpirun -np 3 ./parallel

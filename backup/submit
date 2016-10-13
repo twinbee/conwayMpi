@@ -1,0 +1,21 @@
+# Interpret this job script using tsch 
+#PBS -S /bin/tcsh 
+
+# Send email to my account on this server when this job begins, ends, or aborts 
+#PBS -m abe 
+
+# Use a max of 1 CPU, 24 hours real time, 2 hours CPU time, and 100MB memory
+# ncpus is used for the shared memory systems (redwood, sweetgum, onyx)
+# If this were a mimosa job, the user would need to use nodes instead of ncpus 
+#PBS -l ncpus=1 
+#PBS -l walltime=24:00:00,cput=2:00:00 
+#PBS -l mem=100MB 
+
+# Name this job "my_simple_job" 
+#PBS -N my_simple_job 
+rm my_simple_job.o* # Remove any PBS output files from previous runs 
+rm my_simple_job.e* # Remove any PBS error files from previous runs 
+cd fortran # Change directories to my fortran directory 
+rm ./*.out # Remove any previous executables from this directory 
+f77 simple.f # compile my Fortran source program 
+./a.out >> simple.out # Run my program. Save output to "simple.out" 

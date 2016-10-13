@@ -1,0 +1,1 @@
+mpiCC -o parallel2 parallel2.cpp && mpirun -np $1 ./parallel2

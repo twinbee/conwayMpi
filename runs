@@ -1,0 +1,1 @@
+mpiCC -o serial serial_wtime.cpp && mpirun -np 1 serial

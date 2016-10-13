@@ -1,0 +1,27 @@
+# Interpret this job script using bash
+#PBS -S /bin/tcsh 
+#
+# Send email to my account on this server when this job begins, ends, or aborts 
+#PBS -m abe 
+#
+# Use a max of 5 CPU, 1 hours real time, 1 min CPU time, and 100MB memory
+# ncpus is used for the shared memory systems (redwood, sweetgum, onyx)
+# If this were a mimosa job, the user would need to use nodes instead of ncpus 
+#
+#PBS -l nodes=5
+#PBS -l walltime=1:00:00,cput=0:01:00 
+#PBS -l mem=16MB 
+#
+#PBS -N conway_pl 
+#
+cd conway
+#
+rm conway_pl.o* # Remove any PBS output files from previous runs 
+rm conway_pl.e* # Remove any PBS error files from previous runs 
+#
+# Remove any previous executables from this directory 
+rm -f parallel parallel2
+#	
+/usr/local/apps/mpich-1.2.4/bin/mpiCC -o parallel2 parallel2.cpp
+#
+mpirun -np 5 ./parallel2
